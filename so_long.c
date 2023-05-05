@@ -15,7 +15,9 @@ void	check_name(char *s, t_vars *vars)
 
 void	get_map(char *s, t_vars	*vars)
 {
+	char	*line;
 	check_name(s, vars);
+
 }
 
 int	main(int ac, char **av)

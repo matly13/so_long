@@ -6,7 +6,7 @@
 /*   By: mbasile <mbasile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 14:17:00 by mbasile           #+#    #+#             */
-/*   Updated: 2023/05/05 18:26:47 by mbasile          ###   ########.fr       */
+/*   Updated: 2023/05/05 18:34:36 by mbasile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# define BUFFER_SIZE 1
 
 //get_next_line_utils.c
 int		ft_strlen_2(char *str);

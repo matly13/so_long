@@ -8,6 +8,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+typedef struct s_maps {
+
+}	t_maps;
+
 typedef struct s_vars {
 	void			*mlx;
 	void			*win;
