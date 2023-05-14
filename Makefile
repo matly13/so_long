@@ -10,19 +10,21 @@ OBJS = $(SRC:.c=.o)
 
 LIBFT = libft/
 PRINTF = ft_printf/
+MINILIBX = mlx_linux/
 
-LIBS = $(LIBFT)libft.a $(PRINTF)libftprintf.a
+LIBS = $(LIBFT)libft.a $(PRINTF)libftprintf.a 
 
 RM = rm -f
 
 CC = gcc -Wall -Wextra -Werror -g
 
-.c.o = ${CC} -c $< -o ${<:.c=.o}
+.c.o = ${CC} -I/usr/include -Imlx_linux -O3 -c $< -o ${<:.c=.o}
 
 $(NAME): ${OBJS}
 	make -C $(LIBFT)
 	make -C $(PRINTF)
-	$(CC) $(OBJS) $(LIBS) -o $(NAME)
+	make -C $(MINILIBX)
+	$(CC) $(OBJS) $(LIBS) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 all: $(NAME)
 
@@ -34,6 +36,7 @@ clean:
 fclean: clean
 	make fclean -C $(LIBFT)
 	make fclean -C $(PRINTF)
+	make clean -C $(MINILIBX)
 	${RM} $(NAME) ${OBJB}
 
 re: fclean all
