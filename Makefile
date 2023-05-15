@@ -1,7 +1,8 @@
 NAME = so_long
 
 SRC = so_long.c \
-		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+		image.c
 
 CC = gcc
 FLAG = -Werror -Wextra - Wall -g

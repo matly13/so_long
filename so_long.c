@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbasile <mbasile@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/15 16:20:12 by mbasile           #+#    #+#             */
+/*   Updated: 2023/05/15 17:43:07 by mbasile          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	check_name(char *s, t_vars *vars)
@@ -163,11 +175,14 @@ int	main(int ac, char **av)
 	}
 	vars = malloc(sizeof(t_vars));
 	get_map(av[1], vars);
-	// vars->mlx = 
+	vars->mlx = mlx_init();
+	vars->win = mlx_new_window(vars->mlx, vars->map_info.map_w * 64, vars->map_info.map_h * 64, "so_long");
+	load_map(vars);
 	while (vars->map[i])
 	{
 		ft_printf("%s\n",vars->map[i]);
 		i++;
 	}
+	mlx_loop(vars->mlx);
 	return (0);
 }
