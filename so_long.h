@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbasile <mbasile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/15 16:20:21 by mbasile           #+#    #+#             */
-/*   Updated: 2023/05/15 17:49:41 by mbasile          ###   ########.fr       */
+/*   Created: 2023/05/23 16:59:47 by mbasile           #+#    #+#             */
+/*   Updated: 2023/05/24 12:56:22 by mbasile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@
 # define ERR_MAP_3 "Error\nI muri sono sbagliati, minkione!\n"
 # define ERR_MAP_4 "Error\nManca Pippo Franco, rincoglionito!\n"
 
-typedef	struct s_sprite {
+typedef struct s_sprite {
 	void	*wall;
 	void	*player;
 	void	*coin;
 	void	*escape;
 	void	*background;
 }	t_sprite;
+
+typedef struct s_vector {
+	int	x;
+	int	y;
+}	t_vector;
 
 typedef struct s_maps {
 	int		map_h;
@@ -49,9 +54,29 @@ typedef struct s_vars {
 	int			nb_player;
 	int			coin;
 	int			escape;
+	int			collected;
 	t_sprite	sprite;
+	t_vector	p_pos;
+	int			counter;
 }	t_vars;
 
-void    load_map(t_vars *vars);
+/* MAP FUNCTION */
+
+void	ft_error_map(char *str, t_vars *vars);
+void	check_map(t_vars *vars);
+void	get_height(char *s, t_vars *vars);
+void	get_map(char *s, t_vars	*vars);
+void	check_name(char *s, t_vars *vars);
+void	check_rect(t_vars *vars);
+void	check_min_req(t_vars *vars);
+void	check_wall(t_vars *vars);
+void	check_char(t_vars *vars);
+
+void	load_map(t_vars *vars);
+int		ft_key_control(int kc, t_vars *vars);
+int		end_game(t_vars *vars);
+void	upload_sprite(t_vars *vars);
+void	check_01(int i, int j, t_vars *vars);
+void	check_pec(int i, int j, t_vars *vars);
 
 #endif

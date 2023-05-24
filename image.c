@@ -5,58 +5,55 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbasile <mbasile@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/15 17:32:52 by mbasile           #+#    #+#             */
-/*   Updated: 2023/05/15 17:54:09 by mbasile          ###   ########.fr       */
+/*   Created: 2023/05/23 14:15:24 by mbasile           #+#    #+#             */
+/*   Updated: 2023/05/24 12:55:57 by mbasile          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    upload_sprite(t_vars *vars)
+void	upload_sprite(t_vars *vars)
 {
 	int	x;
 
 	x = 64;
-    vars->sprite.background = mlx_xpm_file_to_image(vars->mlx, "sprite/background.xpm", &x, &x);
-    vars->sprite.wall = mlx_xpm_file_to_image(vars->mlx, "sprite/wall.xpm", &x, &x);
-    vars->sprite.coin = mlx_xpm_file_to_image(vars->mlx, "sprite/coin.xpm", &x, &x);
-    vars->sprite.player = mlx_xpm_file_to_image(vars->mlx, "sprite/player.xpm", &x, &x);
-    vars->sprite.escape = mlx_xpm_file_to_image(vars->mlx, "sprite/escape.xpm", &x, &x);
+	vars->sprite.background = mlx_xpm_file_to_image(vars->mlx,
+			"sprite/background.xpm", &x, &x);
+	vars->sprite.wall = mlx_xpm_file_to_image(vars->mlx,
+			"sprite/wall.xpm", &x, &x);
+	vars->sprite.coin = mlx_xpm_file_to_image(vars->mlx,
+			"sprite/coin.xpm", &x, &x);
+	vars->sprite.player = mlx_xpm_file_to_image(vars->mlx,
+			"sprite/player.xpm", &x, &x);
+	vars->sprite.escape = mlx_xpm_file_to_image(vars->mlx,
+			"sprite/escape.xpm", &x, &x);
 }
 
-void    load_map(t_vars *vars)
+void	init_struct(t_vars *vars)
 {
-    int i;
-    int j;
+	vars->p_pos.x = 0;
+	vars->p_pos.y = 0;
+}
 
-	upload_sprite(vars);
-    i = 0;
-    while (vars->map[i])
-    {
-        j = 0;
-        while (vars->map[i][j])
-        {
-            if (vars->map[i][j] == '0')
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.background, j, i);
-            else if (vars->map[i][j] == '1')
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.wall, j, i);
-            else if (vars->map[i][j] == 'P')
-            {
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.background, j, i);
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.player, j, i);
-            }
-			else if (vars->map[i][j] == 'E')
-            {
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.background, j, i);
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.escape, j, i);
-            }
-			else if (vars->map[i][j] == 'C')
-            {
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.background, j, i);
-                mlx_put_image_to_window(vars->mlx, vars->win, vars->sprite.coin, j, i);
-            }
+void	load_map(t_vars *vars)
+{
+	int	i;
+	int	j;
+
+	init_struct(vars);
+	i = 0;
+	while (vars->map[i])
+	{
+		j = 0;
+		while (vars->map[i][j])
+		{
+			if (vars->map[i][j] == '0' || vars->map[i][j] == '1')
+				check_01(i, j, vars);
+			else if (vars->map[i][j] == 'P' || vars->map[i][j] == 'E'
+					|| vars->map[i][j] == 'C')
+				check_pec(i, j, vars);
 			j++;
-        }
+		}
 		i++;
-    }
+	}
 }
